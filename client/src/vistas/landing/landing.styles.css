@@ -1,0 +1,28 @@
+.divLanding {
+  margin: 0;
+  padding: 0;
+  background-image: url(C:\Users\Usuario\Desktop\PI-Videogames-main\imgLanding.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tituloLanding {
+  color: white;
+  font-size: 5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.buttonLanding {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

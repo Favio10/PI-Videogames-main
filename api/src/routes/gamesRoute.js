@@ -7,10 +7,10 @@ const {
 } = require("../handlers/gamesHand");
 
 const gamesRoute = Router();
-gamesRoute.get("/name?", getNameHand);
-gamesRoute.get("/", getAllHand);
-gamesRoute.get("/:id", getDetailHand);
+gamesRoute.get("/?", getNameHand);
 
+gamesRoute.get("/:id", getDetailHand);
+gamesRoute.get("/", getAllHand);
 gamesRoute.post("/", postNewHand);
 
 module.exports = gamesRoute;

@@ -1,0 +1,24 @@
+.search-box {
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  padding: 10px;
+  line-height: 30px;
+  margin-top: 30px;
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-box button {
+  padding: 10px;
+  border: none;
+  background-color: rgb(93, 176, 218);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.about {
+  margin-left: auto;
+}

@@ -16,6 +16,7 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
 
       description: {
@@ -38,9 +39,13 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
+      created: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+    },
+    {
+      timestamps: false,
     }
-    // {
-    //   timestamps: false,
-    // }
   );
 };

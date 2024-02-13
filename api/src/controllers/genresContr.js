@@ -3,28 +3,41 @@ const API_KEY = process.env.API_KEY;
 const { Genres } = require("../db");
 
 const getAllCont = async () => {
-  const response = await axios.get(
-    `https://api.rawg.io/api/genres?key=${API_KEY}`
-  );
-  const dataApi = response.data;
+  try {
+    const response = await axios.get(
+      `https://api.rawg.io/api/genres?key=${API_KEY}`
+    );
+    const dataApi = response.data;
 
-  if (dataApi.results) {
-    const genresArray = dataApi.results.map((genre) => genre.name);
+    // if (dataApi.results) {
+    //   const genresArray = dataApi.results.map((genre) => genre.name);
 
-    //const countGenres = await genres.findAndCountAll();
-    //if (countGenres.count === 0) {
-    const existGenres = await Genres.findAll();
+    if (dataApi.results) {
+      const genresArray = dataApi.results.map((genre) => ({
+        id: genre.id,
+        name: genre.name,
+      }));
+      // console.log(genresArray);
+      const countGenres = await Genres.findAndCountAll();
 
-    if (existGenres.length === 0) {
-      for (const genreName of genresArray) {
-        await Genres.create({ name: genreName });
+      if (countGenres.count === 0) {
+        const existGenres = await Genres.findAll();
+
+        if (existGenres.length === 0) {
+          for (const genreName of genresArray) {
+            await Genres.create({ id: genreName.id, name: genreName.name });
+          }
+          console.log("generos guardados en la base de datos");
+        } else {
+          console.log("La base ya contiene generos");
+        }
+        //console.log(genresArray);
       }
-      console.log("generos guardados en la base de datos");
-    } else {
-      console.log("La base ya contiene generos");
+      return [genresArray];
     }
-    return [genresArray];
+  } catch (error) {
+    console.error("Error al obtener datos desde la API:", error.message);
+    throw error; // Puedes manejar el error según tus necesidades
   }
 };
-
 module.exports = { getAllCont };

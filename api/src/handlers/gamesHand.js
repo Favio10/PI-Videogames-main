@@ -7,7 +7,8 @@ const {
 
 const getAllHand = async (req, res) => {
   try {
-    const response = await getAllCont();
+    const page = req.query.page || 1;
+    const response = await getAllCont(page);
     res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -31,7 +32,13 @@ const getDetailHand = async (req, res) => {
 const getNameHand = async (req, res) => {
   const { name } = req.query;
   try {
-    res.status(200).json(`Aqui aparece el name: ${name}`);
+    if (name) {
+      const response = await getNameContr(name);
+      res.status(200).json(response);
+    } else {
+      const response = await getAllCont();
+      res.status(200).json(response);
+    }
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

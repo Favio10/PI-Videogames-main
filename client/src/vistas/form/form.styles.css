@@ -1,0 +1,60 @@
+.box-container {
+  gap: 10px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.label-input {
+  align-items: center;
+  gap: 10px;
+  gap: 10px;
+}
+
+.boton-home {
+  position: absolute;
+  left: 5%;
+  margin: 10px;
+  background-color: black;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-home:hover {
+  background-color: darkgrey;
+  transform: scale(1.1);
+}
+
+.submit {
+  width: fit-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.check-boxPlat {
+  display: inline-block;
+  margin-right: 10px;
+}

@@ -1,0 +1,53 @@
+.cards-list {
+  width: 85vw;
+  margin: auto auto 40px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  text-decoration: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-family: "cursive", "Helvetica Neue", Helvetica, sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 8px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-decoration: none;
+}
+
+.pagination button:hover {
+  background-color: darkgrey;
+}
+
+.selOption {
+  width: 130px;
+  padding: 10px;
+  border: none;
+  background-color: rgb(93, 176, 218);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.box-filter {
+  display: flex;
+  margin-right: 30px;
+}
+
+.all-select {
+  display: flex;
+}
