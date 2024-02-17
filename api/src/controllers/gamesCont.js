@@ -163,7 +163,7 @@ const postNewCont = async (
   image,
   released,
   rating,
-  genresArray
+  genres
 ) => {
   const newGame = await Videogame.create({
     name,
@@ -172,16 +172,15 @@ const postNewCont = async (
     image,
     released,
     rating,
-    genresArray,
   });
 
-  if (genresArray && genresArray.length > 0) {
-    const genres = await Genres.findAll({
-      where: { name: genresArray },
-    });
+  // if (genresArray && genresArray.length > 0) {
+  //   const genres = await Genres.findAll({
+  //     where: { name: genresArray },
+  //   });
 
-    await newGame.addGenres(genres);
-  }
+  await newGame.addGenres(genres);
+  // }
   //await newGame.addGenres(genres);
 
   return newGame;
