@@ -13,6 +13,12 @@ function Detail() {
     dispatch(getById(id));
   }, [dispatch, id]);
 
+  let platformNuevo;
+
+  if (character && character.platform) {
+    platformNuevo = character.platform.join(", ");
+  }
+
   return (
     <div>
       <Link to="/home">
@@ -29,7 +35,9 @@ function Detail() {
           <h1>{character.name}</h1>
           <p>Rating actual: {character.rating}</p>
           <p>Generos: {character.genres}</p>
-          <p>Plataformas: {character.plataforma}</p>
+          <p>
+            Plataformas: {character.plataforma} {platformNuevo}
+          </p>
           <p>Fecha de lanzamiento: {character.released}</p>
           <p>Descripcion: {character.description}</p>
         </div>

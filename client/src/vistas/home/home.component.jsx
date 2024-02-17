@@ -20,6 +20,7 @@ function Home() {
   useEffect(() => {
     setError(null);
 
+    // useEffect(() => {
     if (searchString.trim() !== "") {
       dispatch(getByName(searchString))
         .then((response) => {
@@ -29,8 +30,10 @@ function Home() {
             setError(null);
           }
         })
-        .catch((err) => {
-          setError();
+        .catch(() => {
+          setError(
+            "Ocurrió un error al realizar la búsqueda. Intenta nuevamente..."
+          );
         });
     } else {
       dispatch(getVideogames())
@@ -41,10 +44,9 @@ function Home() {
             setError(null);
           }
         })
-        .catch((err) => {
-          setError(
-            "Ocurrio un error al cargar la lista. Intenta nuevamente..."
-          );
+        .catch(() => {
+          setError();
+          //"Ocurrio un error al cargar la lista. Intenta nuevamente..."
         });
     }
   }, [dispatch, searchString]);
@@ -53,9 +55,12 @@ function Home() {
     <div className="home">
       <Navbar handleSearch={handleSearch} />
       <hr />
-      <h2 className="home-title">Videogame List</h2>
+      <a href={window.location.pathname}>
+        <h2 className="home-title">Videogame List</h2>
+      </a>
+
       {error && <p className="error-message">{error}</p>}
-      <Cards allVideoGames={allVideoGames} />
+      <Cards allVideoGames={allVideoGames.flat()} />
     </div>
   );
 }

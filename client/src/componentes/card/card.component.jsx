@@ -2,10 +2,15 @@ import "./card.styles.css";
 import { Link } from "react-router-dom";
 
 function Card({ videoGame, index }) {
-  //console.log("esto recibo:", { videoGame });
-  const { name, image, rating, genres, id } = videoGame[0];
+  //const { name, image, rating, genres, id } = videoGame[0];
+  const { name, image, rating, genres, id } = videoGame;
 
-  const genremap = genres.join(", ");
+  let genremap;
+  if (genres) {
+    genremap = genres.join(", ");
+  } else {
+    genremap = genres;
+  }
 
   return (
     <Link to={`/home/${id}`}>

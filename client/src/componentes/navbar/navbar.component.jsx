@@ -4,8 +4,7 @@ import "./navbar.styles.css";
 
 function Navbar({ handleSearch }) {
   function handleChange(e) {
-    const value = e.target.value;
-    handleSearch(value);
+    handleSearch(e.target.value);
   }
 
   return (

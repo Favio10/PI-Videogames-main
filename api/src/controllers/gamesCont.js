@@ -3,28 +3,48 @@ const axios = require("axios");
 const API_KEY = process.env.API_KEY;
 const { Videogame, Genres } = require("../db");
 
-// const infoClean = (array) => {
-//   return array.map((arr) => {
-//     const cleanedInfo = {
-//       image: arr.background_image,
-//       name: arr.name,
-//       rating: arr.rating_top,
+// const getAllCont = async () => {
+//   const infoDB = await Videogame.findAll();
+//   const response = (
+//     await axios.get(
+//       `https://api.rawg.io/api/games?key=${API_KEY}&page_size=100`
+//     )
+//   ).data;
+
+//   return response.results.map((game) => {
+//     const cleanGenres = game.genres.map((genre) => genre.name);
+//     const clean = {
+//       genres: cleanGenres,
+//       id: game.id,
+//       image: game.background_image,
+//       name: game.name,
+//       rating: game.rating,
+//       created: false,
 //     };
-//     return cleanedInfo;
+
+//     if (infoDB.length !== 0) {
+//       return [...infoDB, ...clean];
+//     } else {
+//       return [clean];
+//     }
 //   });
 // };
 
 const getAllCont = async () => {
+  // Obtener información de la base de datos
   const infoDB = await Videogame.findAll();
+
+  // Obtener información de la API Rawg
   const response = (
     await axios.get(
       `https://api.rawg.io/api/games?key=${API_KEY}&page_size=100`
     )
   ).data;
 
-  return response.results.map((game) => {
+  // Mapear los resultados de la API
+  const apiGames = response.results.map((game) => {
     const cleanGenres = game.genres.map((genre) => genre.name);
-    const clean = {
+    return {
       genres: cleanGenres,
       id: game.id,
       image: game.background_image,
@@ -32,9 +52,13 @@ const getAllCont = async () => {
       rating: game.rating,
       created: false,
     };
-
-    return [...infoDB, clean];
   });
+
+  // Combinar la información de la base de datos y la API
+  const combinedGames =
+    infoDB.length !== 0 ? [...infoDB, ...apiGames] : apiGames;
+
+  return combinedGames;
 };
 
 const getDetailCont = async (id, source) => {
@@ -46,7 +70,7 @@ const getDetailCont = async (id, source) => {
     );
     const data = response.data;
     if (!data || Object.keys(data).length === 0) {
-      return "no se encontro una zara con ese ID en la API";
+      return "no se encontro un videogame con ese ID en la API";
     }
 
     const {
@@ -98,7 +122,7 @@ const getDetailCont = async (id, source) => {
 const getNameContr = async (name) => {
   try {
     const apiResponse = await axios.get(
-      `https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`
+      `https://api.rawg.io/api/games?key=${API_KEY}&search=${name}&page_size=15`
     );
 
     const videogameApi = apiResponse.data.results.map((game) => {
@@ -148,16 +172,17 @@ const postNewCont = async (
     image,
     released,
     rating,
+    genresArray,
   });
 
-  // if (genresArray && genresArray.length > 0) {
-  //   const genres = await Genres.findAll({
-  //     where: { name: genresArray },
-  //   });
+  if (genresArray && genresArray.length > 0) {
+    const genres = await Genres.findAll({
+      where: { name: genresArray },
+    });
 
-  //   await newGame.addGenres(genres);
-  // }
-  await newGame.addGenres(genresArray);
+    await newGame.addGenres(genres);
+  }
+  //await newGame.addGenres(genres);
 
   return newGame;
 };

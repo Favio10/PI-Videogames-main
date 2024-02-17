@@ -8,18 +8,23 @@ export const GET_GENRES = "GET_GENRES";
 
 export function getVideogames() {
   return async function (dispatch) {
-    const response = await axios(`http://localhost:3001/videogames/`);
-    return dispatch({
-      type: GET_VIDEOGAMES,
-      payload: response.data,
-    });
+    try {
+      const response = await axios(`http://localhost:3001/videogames/`);
+      dispatch({
+        type: GET_VIDEOGAMES,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error("Error fetching videogames:", error);
+    }
+    return;
   };
 }
 
 export function getByName(name) {
   return async function (dispatch) {
     const response = await axios(
-      `http://localhost:3001/videogames/?search=${name}`
+      `http://localhost:3001/videogames/?name=${name}`
     );
     return dispatch({
       type: GET_BY_NAME,
@@ -41,15 +46,8 @@ export function getById(id) {
 export function createVideoGame(data) {
   return async function (dispatch) {
     try {
-      const {
-        name,
-        description,
-        platform,
-        image,
-        released,
-        rating,
-        genresArray,
-      } = data;
+      const { name, description, platform, image, released, rating, genres } =
+        data;
       const videogameData = {
         name,
         description,
@@ -57,7 +55,7 @@ export function createVideoGame(data) {
         image,
         released,
         rating,
-        genresArray,
+        genres,
       };
 
       const response = await axios.post(
@@ -86,5 +84,6 @@ export function getGenres() {
     } catch (error) {
       console.log("Error al obtener los generos: ", error);
     }
+    return;
   };
 }

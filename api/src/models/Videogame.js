@@ -23,12 +23,12 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      platform: {
+      image: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      image: {
-        type: DataTypes.STRING,
+      platform: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
       released: {

@@ -1,16 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import {
-  createVideoGame,
-  getGenres,
-  getVideogames,
-} from "../../redux/actions/";
+import { createVideoGame, getGenres } from "../../redux/actions/";
 import { Link } from "react-router-dom";
 import "./form.styles.css";
 
 function Form() {
   const dispatch = useDispatch();
   const genres = useSelector((state) => state.genres);
+  const [selectedGenreId, setSelectedGenreId] = useState([]);
+  const [selectedGenreName, setSelectedGenreName] = useState([]);
+
   //console.log("esto esta en el estado NUEVO", genres);
 
   // esto lo tengo tambien en el home pero por las dudas lo ejecuto una vez mas
@@ -35,20 +34,46 @@ function Form() {
   // aca estare manejando las actualizaciones del listado de genres
   const handleChange = (e) => {
     const { name, value, options, checked } = e.target;
+    //console.log(`Input changed: ${name} = ${value}`);
+    // console.log(
+    //   `Selected options: ${name} = ${Array.from(options)
+    //     .filter((option) => option.selected)
+    //     .map((option) => option.text)
+    //     .join(", ")}`
+    // );
 
     if (name === "genres") {
-      const selecOptions = Array.from(options)
+      const selecOptions = Array.from(options) //aca modifique primero
         .filter((option) => option.selected)
-        .map((option) =>
-          genres.find((genre) => genre.id === parseInt(option.value))
-        );
+        .map((option) => option.value);
 
-      console.log("esto es el select", selecOptions);
+      //console.log("esto es el select", selecOptions);
 
       setFormData((prevData) => ({
         ...prevData,
         [name]: selecOptions,
       }));
+      //const selectedId = selecOptions.map((option) => option.value);
+      //setSelectedGenreId(selecOptions);
+      //! con este newset me aseguro de que no deja cargar repetidos
+      setSelectedGenreId((prevSelected) => [
+        ...new Set([...prevSelected, ...selecOptions]), //!aca modifique primero el selectoptions
+      ]);
+      //! este tenia antes que me dejaba a veces cargar repetidos, pero si se enviaba el form se actualizaba
+      // setSelectedGenreId((prevSelected) => [
+      //   ...prevSelected,
+      //   ...selecOptions,
+      // ]);
+
+      setSelectedGenreName((prevSelectedName) => [
+        ...prevSelectedName,
+        ...selecOptions.map(
+          (id) => genresArray.find((genre) => genre.id === parseInt(id)).name
+        ),
+      ]);
+
+      console.log("selectedGenreId state: ", selectedGenreId);
+      console.log("selectedGenreName state:", selectedGenreName);
     } else if (name === "platform") {
       // Verifica si ya hay dos plataformas seleccionadas
       if (checked && formData.platform.length < 2) {
@@ -60,7 +85,7 @@ function Form() {
     } else {
       setFormData((prevData) => ({
         ...prevData,
-        [name]: value,
+        [name]: e.target.value,
       }));
     }
   };
@@ -68,6 +93,7 @@ function Form() {
   // con este handleSubmit es para no recargar la pagina a cada rato
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //console.log("Form data:", formData);
 
     // aqui indico cuales son requeridos
     const required = [
@@ -87,12 +113,14 @@ function Form() {
       return;
     }
 
+    // validacion de name
     const nameValidation = /^[a-zA-Z0-9\s]+$/;
     if (!nameValidation.test(formData.name)) {
       alert("El nombre no debe contener simbolos");
       return;
     }
 
+    //validacion de rating
     const ratingValidation = parseFloat(formData.rating);
     if (ratingValidation < 0.1) {
       alert("El valor minimo de rating es 0.1");
@@ -100,6 +128,7 @@ function Form() {
       alert("El valor maximo de rating es 5.0");
     }
 
+    // validacion de plataforma
     const platformValidation = formData.platform;
     if (platformValidation.length > 2) {
       alert("El maximo de plataformas es 2");
@@ -113,7 +142,7 @@ function Form() {
         platform: formData.platform,
         released: formData.released,
         rating: formData.rating,
-        genres: formData.genres,
+        genres: selectedGenreId,
       });
       await dispatch(
         createVideoGame({
@@ -123,10 +152,10 @@ function Form() {
           platform: formData.platform,
           released: formData.released,
           rating: formData.rating,
-          genres: formData.genres,
+          genres: selectedGenreId,
         })
       );
-      alert("Raza creada exitosamente");
+      alert("VideoGame creado exitosamente");
 
       setFormData({
         name: "",
@@ -137,12 +166,14 @@ function Form() {
         rating: "",
         genres: [],
       });
+      setSelectedGenreId([]);
+      setSelectedGenreName([]);
     } catch (error) {
       alert("Hubo un problema al crear tu videogame");
     }
   };
 
-  const genresArray = genres.length > 0 ? genres[0] : [];
+  const genresArray = Array.isArray(genres[0]) ? genres[0] : [];
 
   return (
     <div className="box-container">
@@ -198,6 +229,18 @@ function Form() {
             step={0.1}
             value={formData.rating}
             onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="label-input">
+          <label htmlFor="released">Fecha de lanzamiento: </label>
+
+          <input
+            type="date" // Example using type="date"
+            name="released"
+            value={formData.released}
+            onChange={handleChange}
+            placeholder="Ingrese la fecha de lanzamiento"
             required
           />
         </div>
@@ -282,35 +325,12 @@ function Form() {
             <label htmlFor="Nintendo">Nintendo</label>
           </div>
         </div>
-        {/* <div className="label-input">
-          <label htmlFor="genres">Generos: </label>
-          <select
-            name="genres"
-            value={formData.genres}
-            onChange={handleChange}
-            multiple
-          >
-            {genres.map((genre) => (
-              <option key={genre.id} value={genre.id}>
-                {genre.name}
-              </option>
-            ))}
-          </select>
-          <div>
-            <p>Opciones seleccionadas: </p>
-            <ul>
-              {formData.genres.map((selected) => (
-                <li key={selected.id}>{selected.name}</li>
-              ))}
-            </ul>
-          </div>
-        </div> */}
 
         <div className="label-input">
           <label htmlFor="genres"> Generos: </label>
           <select
             name="genres"
-            value={formData.genres}
+            value={formData.genres.map((genre) => genre.id)}
             onChange={handleChange}
             multiple
           >
@@ -324,10 +344,20 @@ function Form() {
           <div className="label-input">
             <label htmlFor="genres">Géneros seleccionados: </label>
             <ul>
-              {formData.genres.map((selected) => (
-                <li key={selected.id}>{selected.name} </li>
+              {selectedGenreName.map((name) => (
+                <li key={name}>{name}</li>
               ))}
             </ul>
+            {/* <div className="label-input">
+              <label htmlFor="genres">Generos prueba: </label>
+              <ul>
+                {genresArray.map((genre) => (
+                  <li key={genre.id} value={genre.id}>
+                    {genre.name}
+                  </li>
+                ))}
+              </ul>
+            </div> */}
           </div>
         </div>
 
@@ -341,50 +371,3 @@ function Form() {
 }
 // lo primero que agrege fue el select
 export default Form;
-
-/* <div>
-        <label>Selecciona hasta dos plataformas:</label>
-        <div>
-          <input type="checkbox" id="PC" name="plataformas" value="PC" />
-          <label for="PC">PC (Linux, Windows, macOS)</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="Moviles"
-            name="plataformas"
-            value="Moviles"
-          />
-          <label for="Moviles">Mobile (iOS, Android)</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="PlayStation"
-            name="plataformas"
-            value="PlayStation"
-          />
-          <label for="PlayStation">PlayStation (4, 5)</label>
-        </div>
-        <div>
-          <input type="checkbox" id="Xbox" name="plataformas" value="Xbox" />
-          <label for="Xbox">Xbox</label>
-        </div>
-        <div>
-          <input type="checkbox" id="Wii" name="plataformas" value="Wii" />
-          <label for="Wii">Wii</label>
-        </div>
-        <div>
-          <input type="checkbox" id="Atari" name="plataformas" value="Atari" />
-          <label for="Atari">Atari</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="Nintendo"
-            name="plataformas"
-            value="Nintendo"
-          />
-          <label for="Nintendo">Nintendo</label>
-        </div>
-      </div> */
