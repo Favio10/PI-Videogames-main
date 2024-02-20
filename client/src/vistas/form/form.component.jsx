@@ -44,7 +44,7 @@ function Form() {
 
       //! con este newset me aseguro de que no deja cargar repetidos
       setSelectedGenreId((prevSelected) => [
-        ...new Set([...prevSelected, ...uniqueGenres]), //!aca modifique primero el selectoptions
+        ...new Set([...prevSelected, ...uniqueGenres]),
       ]);
 
       setSelectedGenreName((prevSelectedName) => [
@@ -155,13 +155,14 @@ function Form() {
 
   return (
     <div className="box-container">
+      <br />
+      <br />
       <div>
         <Link to="/home">
-          <button className="boton-home">Home</button>
-          <hr />
+          <button className="buttonHome">Home</button>
         </Link>
       </div>
-      <h1>Aqui podes crear tu videojuego:</h1>
+      <h1 className="tittleForm">¡CREA TU VIDEOJUEGO AQUI!</h1>
       <br />
       <form onSubmit={handleSubmit}>
         <div className="label-input">
@@ -214,7 +215,7 @@ function Form() {
           <label htmlFor="released">Fecha de lanzamiento: </label>
 
           <input
-            type="date" // Example using type="date"
+            type="date"
             name="released"
             value={formData.released}
             onChange={handleChange}
@@ -223,93 +224,125 @@ function Form() {
           />
         </div>
         <div className="check-boxPlat">
-          <label>Selecciona hasta dos plataformas:</label>
+          <br />
+          <br />
+          <label className="labelPlataforma">
+            {" "}
+            SELECCIONA HASTA DOS PLATAFORMAS:
+          </label>
           <br />
           <div>
+            <br />
             <div className="check-boxPlat">
               <input
                 type="checkbox"
+                className="ckeckIndiv"
                 id="PC"
                 name="platform"
                 value="PC"
                 onChange={handleChange}
                 checked={formData.platform.includes("PC")}
               />
-              <label htmlFor="PC">PC (Linux, Windows, macOS)</label>
+              <label className="ckeckLabel" htmlFor="PC">
+                PC (Linux, Windows, macOS)
+              </label>
             </div>
             <div className="check-boxPlat">
               <input
                 type="checkbox"
+                className="ckeckIndiv"
                 id="Moviles"
                 name="platform"
                 value="Moviles"
                 onChange={handleChange}
                 checked={formData.platform.includes("Moviles")}
               />
-              <label htmlFor="Moviles">Mobile (iOS, Android)</label>
+              <label className="ckeckLabel" htmlFor="Moviles">
+                Mobile (iOS, Android)
+              </label>
             </div>
             <div className="check-boxPlat">
               <input
                 type="checkbox"
+                className="ckeckIndiv"
                 id="PlayStation"
                 name="platform"
                 value="PlayStation"
                 onChange={handleChange}
                 checked={formData.platform.includes("PlayStation")}
               />
-              <label htmlFor="PlayStation">PlayStation (4, 5)</label>
+              <label className="ckeckLabel" htmlFor="PlayStation">
+                PlayStation (4, 5)
+              </label>
             </div>
             <div className="check-boxPlat">
               <input
                 type="checkbox"
+                className="ckeckIndiv"
                 id="Xbox"
                 name="platform"
                 value="Xbox"
                 onChange={handleChange}
                 checked={formData.platform.includes("Xbox")}
               />
-              <label htmlFor="Xbox">Xbox</label>
+              <label className="ckeckLabel" htmlFor="Xbox">
+                Xbox
+              </label>
             </div>
             <div className="check-boxPlat">
               <input
                 type="checkbox"
+                className="ckeckIndiv"
                 id="Wii"
                 name="platform"
                 value="Wii"
                 onChange={handleChange}
                 checked={formData.platform.includes("Wii")}
               />
-              <label htmlFor="Wii">Wii</label>
+              <label className="ckeckLabel" htmlFor="Wii">
+                Wii
+              </label>
             </div>
             <div className="check-boxPlat">
               <input
                 type="checkbox"
+                className="ckeckIndiv"
                 id="Atari"
                 name="platform"
                 value="Atari"
                 onChange={handleChange}
                 checked={formData.platform.includes("Atari")}
               />
-              <label htmlFor="Atari">Atari</label>
+              <label className="ckeckLabel" htmlFor="Atari">
+                Atari
+              </label>
             </div>
             <div className="check-boxPlat">
               <input
                 type="checkbox"
+                className="ckeckIndiv"
                 id="Nintendo"
                 name="platform"
                 value="Nintendo"
                 onChange={handleChange}
                 checked={formData.platform.includes("Nintendo")}
               />
-              <label htmlFor="Nintendo">Nintendo</label>
+              <label className="ckeckLabel" htmlFor="Nintendo">
+                Nintendo
+              </label>
             </div>
           </div>
         </div>
 
-        <div className="label-input">
-          <label htmlFor="genres"> Generos: </label>
+        <div className="">
+          <label className="labelPlataforma" htmlFor="genres">
+            {" "}
+            GENEROS:
+          </label>
+
           <select
             name="genres"
+            className="selectOption"
             value={formData.genres.map((genre) => genre.id)}
             onChange={handleChange}
             multiple
@@ -323,21 +356,25 @@ function Form() {
 
           <div className="label-input">
             <label htmlFor="genres">Géneros seleccionados: </label>
-            <ul>
+            <ul className="listaTotal">
               {selectedGenreName.map((name) => (
-                <li key={name}>{name}</li>
+                <li className="listInd" key={name}>
+                  {" "}
+                  ✓ {name}
+                </li>
               ))}
             </ul>
           </div>
         </div>
 
         <br />
-        <button type="submit" className="submit">
+        <button type="submit" className="submitButton">
           Create
         </button>
         <hr />
         <br />
       </form>
+      <div></div>
     </div>
   );
 }

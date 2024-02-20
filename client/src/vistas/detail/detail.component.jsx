@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import Card from "../../componentes/card/card.component";
+
 import "./detail.styles.css";
 import { useParams, Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -21,25 +21,30 @@ function Detail() {
 
   return (
     <div>
+      <div>
+        <br />
+      </div>
       <Link to="/home">
-        <button className="boton-home">Home</button>
+        <button className="buttonHome">Home</button>
       </Link>
-      <p className="title">Page Details </p>
+
       {character ? (
         <div className="box-detail">
           <img
             src={character.image}
             alt={character.name}
-            className="image"
+            className="imageDetail"
           ></img>
-          <h1>{character.name}</h1>
-          <p>Rating actual: {character.rating}</p>
-          <p>Generos: {character.genres}</p>
-          <p>
+          <h1 className="nameDetail">{character.name}</h1>
+          <p className="etcDetail">Rating actual: {character.rating}</p>
+          <p className="etcDetail">Generos: {character.genres}</p>
+          <p className="etcDetail">
             Plataformas: {character.plataforma} {platformNuevo}
           </p>
-          <p>Fecha de lanzamiento: {character.released}</p>
-          <p>Descripcion: {character.description}</p>
+          <p className="etcDetail">
+            Fecha de lanzamiento: {character.released}
+          </p>
+          <p className="etcDetail">Descripcion: {character.description}</p>
         </div>
       ) : (
         <p>Carregando...</p>

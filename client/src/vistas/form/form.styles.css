@@ -1,5 +1,3 @@
-/* Agrega estos estilos a tu archivo CSS */
-
 .box-container {
   gap: 20px;
 }
@@ -31,7 +29,6 @@ select {
 
 .check-boxPlat {
   display: inline-block;
-
   align-items: center;
   margin-bottom: 15px;
   margin-right: 10px;
@@ -56,22 +53,165 @@ select {
   margin-right: 5px;
 }
 
-.submit {
-  width: fit-content;
-  align-self: center;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #3498db;
+.buttonHome {
+  display: inline-block;
+  padding: 10px 19px;
+  font-size: 19px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
   color: #fff;
-  border: none;
-  border-radius: 5px;
+  background-color: #a3a3a34f;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-right: 70%;
 }
 
-.submit:hover {
-  background-color: #267bb5;
-  transform: scale(1.1);
+.buttonHome:hover {
+  background-color: #000;
+  color: #12386b;
+  border: 2px solid #12386b;
+  box-shadow: 5px 5px 0px #12386b;
 }
 
-/* Agrega otros estilos según sea necesario */
+.tittleForm {
+  color: #264143;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+  font-size: 3em;
+  margin-top: 0px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  text-decoration: none;
+}
+
+.label-input input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #30cfd0;
+  outline: none;
+  background: transparent;
+}
+
+.label-input label {
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.ckeckIndiv {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #30cfd0;
+  border-radius: 5px;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.ckeckIndiv:before {
+  content: "";
+  background-color: #30cfd0;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.ckeckIndiv:checked:before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.ckeckLabel {
+  font-size: 18px;
+  color: #ffffff71;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+.labelPlataforma {
+  color: aliceblue;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.selectOption {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  display: inline-block;
+  padding: 10px 19px;
+  font-size: 19px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #a3a3a34f;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  cursor: pointer;
+}
+
+.listaTotal {
+  list-style: none;
+  align-items: center;
+  color: rgb(105, 240, 245);
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+
+  font-size: 20px;
+}
+
+.listInd {
+  color: aliceblue;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.submitButton {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.submitButton:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.submitButton:active {
+  transform: translateY(-1px);
+}

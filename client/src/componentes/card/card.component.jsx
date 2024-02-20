@@ -16,9 +16,9 @@ function Card({ videoGame, index }) {
     <Link to={`/home/${id}`}>
       <div className="card-container">
         <img src={image} alt="" className="image" />
-        <h2 className="texto">{name}</h2>
-        <p className="texto">Rating: {rating}</p>
-        <p className="texto">Genero: {genremap}</p>
+        <h2 className="texto1">{name}</h2>
+        <p className="texto2">Rating: {rating}</p>
+        <p className="texto2">Genero: {genremap}</p>
       </div>
     </Link>
   );

@@ -12,17 +12,56 @@
 }
 
 .tituloLanding {
-  color: white;
-  font-size: 5em;
+  color: #264143;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 900;
+  font-size: 6em;
+  margin-top: 40px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+.buttonLanding {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #ff5252a2;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.buttonLanding {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.buttonLanding:hover {
+  background-color: #fff;
+  color: #ff5252a2;
+  border: 2px solid #ff5252a2;
+  box-shadow: 5px 5px 0px #ff5252a2;
+}
+
+.buttonLanding:active {
+  background-color: #fcf414;
+  box-shadow: none;
+  transform: translateY(4px);
+}
+
+.divSegundo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #9e9d9d57;
+  height: auto;
+  width: auto;
+  border: 2px solid #264143;
+  border-radius: 20px;
+  box-shadow: 3px 4px 0px 1px #999087;
+}
+
+.parrafoLanding {
+  font-size: 2.5em;
+  font-weight: 300;
 }

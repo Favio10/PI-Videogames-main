@@ -54,11 +54,10 @@ function Home() {
   return (
     <div className="home">
       <Navbar handleSearch={handleSearch} />
-      <hr />
       <a href={window.location.pathname}>
-        <h2 className="home-title">Videogame List</h2>
+        <h2 className="titleHome">VIDEOGAME LIST</h2>
       </a>
-
+      <br />
       {error && <p className="error-message">{error}</p>}
       <Cards allVideoGames={allVideoGames.flat()} />
     </div>

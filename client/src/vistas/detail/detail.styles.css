@@ -1,0 +1,47 @@
+.buttonHome {
+  display: inline-block;
+  padding: 10px 19px;
+  font-size: 19px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #a3a3a34f;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-right: 70%;
+}
+
+.buttonHome:hover {
+  background-color: #000;
+  color: #12386b;
+  border: 2px solid #12386b;
+  box-shadow: 5px 5px 0px #12386b;
+}
+
+.imageDetail {
+  padding: auto;
+  border: 2px solid #12386b;
+  border-radius: 20px;
+  max-width: 55%;
+  max-height: 55%;
+}
+
+.nameDetail {
+  color: #375e61;
+  text-shadow: 2px 2px 4px rgba(131, 10, 10, 0.5);
+  font-weight: 700;
+  font-size: 3.8em;
+  margin-top: 30px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  text-decoration: none;
+}
+
+.etcDetail {
+  color: antiquewhite;
+  font-weight: 300;
+  font-size: 1.5em;
+}

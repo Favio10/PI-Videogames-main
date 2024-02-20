@@ -11,14 +11,91 @@
   gap: 20px;
 }
 
-.search-box button {
-  padding: 10px;
-  border: none;
-  background-color: rgb(93, 176, 218);
+/* Boton Exit */
+.buttonExit {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #a3a3a34f;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.about {
-  margin-left: auto;
+.buttonExit:hover {
+  background-color: #000;
+  color: #ff5252;
+  border: 2px solid #ff5252;
+  box-shadow: 5px 5px 0px #ff5252;
+}
+
+/* Boton Create */
+
+.buttonCreate {
+  display: inline-block;
+  padding: 10px 19px;
+  font-size: 19px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #a3a3a34f;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.buttonCreate:hover {
+  background-color: #000;
+  color: #52ff5b;
+  border: 2px solid #52ff5b;
+  box-shadow: 5px 5px 0px #52ff5b;
+}
+
+/* Button About */
+
+.buttonAbout {
+  display: inline-block;
+  padding: 10px 19px;
+  font-size: 19px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #a3a3a34f;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.buttonAbout:hover {
+  background-color: #000;
+  color: #12386b;
+  border: 2px solid #12386b;
+  box-shadow: 5px 5px 0px #12386b;
+}
+
+/* Campo Input*/
+.inputSearch {
+  outline: none;
+  padding: 0.5em;
+  border: 1px solid #daa06d;
+  color: #c77732;
+  width: 20em;
+  height: 3em;
+  border-radius: 10px;
+  background-color: #e8eaca;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bolder;
 }

@@ -9,21 +9,23 @@ function Navbar({ handleSearch }) {
 
   return (
     <div className="search-box">
+      <br />
       <Link to="/">
-        <button className="exit">Exit</button>
+        <button className="buttonExit">Exit</button>
       </Link>
       <form>
         <input
           type="search"
           placeholder="Tipea un nombre"
           onChange={handleChange}
+          className="inputSearch"
         />
       </form>
       <Link to="/form">
-        <button>Create your Game</button>
+        <button className="buttonCreate">Create</button>
       </Link>
       <Link to="/about">
-        <button className="about">About</button>
+        <button className="buttonAbout">About</button>
       </Link>
     </div>
   );
