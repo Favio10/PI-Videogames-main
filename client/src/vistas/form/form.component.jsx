@@ -69,7 +69,7 @@ function Form() {
     }
   };
 
-  // con este handleSubmit es para no recargar la pagina a cada rato
+  // con el prev no se me recargara
   const handleSubmit = async (e) => {
     e.preventDefault();
 

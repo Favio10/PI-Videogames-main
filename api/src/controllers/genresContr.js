@@ -9,9 +9,6 @@ const getAllCont = async () => {
     );
     const dataApi = response.data;
 
-    // if (dataApi.results) {
-    //   const genresArray = dataApi.results.map((genre) => genre.name);
-
     if (dataApi.results) {
       const genresArray = dataApi.results.map((genre) => ({
         id: genre.id,
@@ -31,7 +28,6 @@ const getAllCont = async () => {
         } else {
           console.log("La base ya contiene generos");
         }
-        //console.log(genresArray);
       }
       return [genresArray];
     }

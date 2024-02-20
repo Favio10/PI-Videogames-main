@@ -20,7 +20,6 @@ function Home() {
   useEffect(() => {
     setError(null);
 
-    // useEffect(() => {
     if (searchString.trim() !== "") {
       dispatch(getByName(searchString))
         .then((response) => {
@@ -46,7 +45,6 @@ function Home() {
         })
         .catch(() => {
           setError();
-          //"Ocurrio un error al cargar la lista. Intenta nuevamente..."
         });
     }
   }, [dispatch, searchString]);

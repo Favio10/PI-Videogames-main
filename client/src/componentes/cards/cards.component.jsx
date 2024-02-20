@@ -32,7 +32,7 @@ function Cards({ allVideoGames }) {
       let filteredList = [...videoGamesList];
       console.log("Este es el filtered list", filteredList);
 
-      //! filtro por name
+      // filtro por name
       switch (selectOrderName) {
         case "nombreAsc":
           //console.log("Sorting by Nombre Asc");
@@ -54,7 +54,7 @@ function Cards({ allVideoGames }) {
           break;
       }
 
-      //! filtro por origen
+      //filtro por origen
 
       if (origenVideogame === "database") {
         filteredList = filteredList.filter(
@@ -66,7 +66,7 @@ function Cards({ allVideoGames }) {
         );
       }
 
-      //! filtro por genero
+      // filtro por genero
 
       if (selectGenre !== "all") {
         filteredList = filteredList.filter(
@@ -75,7 +75,7 @@ function Cards({ allVideoGames }) {
         );
       }
 
-      //! ordenamiento por rating
+      // ordenamiento por rating
 
       switch (selectOrderRating) {
         case "ratingAsc":

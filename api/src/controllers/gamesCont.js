@@ -3,8 +3,8 @@ const axios = require("axios");
 const API_KEY = process.env.API_KEY;
 const { Videogame, Genres } = require("../db");
 
+// contr todos los videogames (con lista asociada)
 const getAllCont = async () => {
-  // Obtener información de la base de datos
   const infoDB = await Videogame.findAll({
     include: [
       {
@@ -13,14 +13,12 @@ const getAllCont = async () => {
     ],
   });
 
-  // Obtener información de la API Rawg
   const response = (
     await axios.get(
       `https://api.rawg.io/api/games?key=${API_KEY}&page_size=100`
     )
   ).data;
 
-  // Mapear los resultados de la API
   const apiGames = response.results.map((game) => {
     const cleanGenres = game.genres.map((genre) => genre.name);
     return {
@@ -33,7 +31,7 @@ const getAllCont = async () => {
     };
   });
 
-  // filtrar Json de genres
+  // filtro los name del Json de genres
   const transformedDB = infoDB.map((game) => {
     const cleanGenres = game.genres.map((genre) => genre.name);
     return {
@@ -42,12 +40,14 @@ const getAllCont = async () => {
     };
   });
 
-  // Combinar la información de la base de datos y la API
+  // aca combino la información de la base de datos y la API
   const combinedGames =
     transformedDB.length !== 0 ? [...transformedDB, ...apiGames] : apiGames;
 
   return combinedGames;
 };
+
+// cont para cada detail
 
 const getDetailCont = async (id, source) => {
   let gameDetail;
@@ -74,12 +74,11 @@ const getDetailCont = async (id, source) => {
 
     const genreList = genres.map((genre) => genre.name).join(", ");
 
-    // Puedes personalizar la lógica para mapear las plataformas según tus necesidades
+    // incluyo esto por que platforms vienen en array
     const cleanPlatforms = platforms
       .map((platform) => platform.platform.name)
       .join(", ");
 
-    // Construir el objeto limpio con la información deseada
     gameDetail = {
       id: gameId,
       name,
@@ -99,6 +98,7 @@ const getDetailCont = async (id, source) => {
       ],
     });
 
+    // limpio la info que traigo de la tabla
     const genreNames = gameFromDB.genres.map((genre) => genre.name).join(", ");
 
     gameDetail = {
@@ -111,14 +111,11 @@ const getDetailCont = async (id, source) => {
       rating: gameFromDB.rating,
       genres: genreNames,
     };
-    // } catch (error) {
-    //   console.error(error);
-    //   return "Error al consultar la base de datos";
-    // }
   }
   return gameDetail;
 };
 
+// cont para filtro por name
 const getNameContr = async (name) => {
   try {
     const apiResponse = await axios.get(
@@ -156,6 +153,7 @@ const getNameContr = async (name) => {
   }
 };
 
+// contr para crear un videogame
 const postNewCont = async (
   name,
   description,
@@ -182,7 +180,6 @@ const postNewCont = async (
 
     await newGame.addGenres(genresTotal);
   }
-  //await newGame.addGenres(genres);
 
   return newGame;
 };

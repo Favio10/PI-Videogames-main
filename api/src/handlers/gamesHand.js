@@ -74,11 +74,8 @@ const postNewHand = async (req, res) => {
       genres
     );
 
-    //console.log("Respuesta enviada:", response.toJSON());
-
     res.status(200).json(response);
   } catch (error) {
-    //console.error("Error en la creación del videojuego:", error);
     res.status(400).json({ error: error.message });
   }
   return;

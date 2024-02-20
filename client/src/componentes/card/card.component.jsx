@@ -1,8 +1,7 @@
 import "./card.styles.css";
 import { Link } from "react-router-dom";
 
-function Card({ videoGame, index }) {
-  //const { name, image, rating, genres, id } = videoGame[0];
+function Card({ videoGame }) {
   const { name, image, rating, genres, id } = videoGame;
 
   let genremap;
