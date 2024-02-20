@@ -28,10 +28,6 @@ function Cards({ allVideoGames }) {
   }, [dispatch]);
 
   useEffect(() => {
-    //console.log("Videogames list update: ", videoGamesList);
-    //console.log("Select order name:", selectOrderName);
-    //console.log("Select order genre:", selectGenre);
-
     setListOrdVideogame((prevList) => {
       let filteredList = [...videoGamesList];
       console.log("Este es el filtered list", filteredList);
@@ -41,7 +37,7 @@ function Cards({ allVideoGames }) {
         case "nombreAsc":
           //console.log("Sorting by Nombre Asc");
           filteredList = filteredList
-            .filter((videoGame) => videoGame.name) // No es necesario el array dentro de array
+            .filter((videoGame) => videoGame.name)
             .sort((a, b) =>
               a.name.localeCompare(b.name, undefined, { undefined: "base" })
             );

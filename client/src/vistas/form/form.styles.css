@@ -1,50 +1,64 @@
+/* Agrega estos estilos a tu archivo CSS */
+
 .box-container {
-  gap: 10px;
+  gap: 20px;
 }
+
 form {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  width: 60%;
+  margin: auto;
+}
+
+.label-input {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
-input {
+input,
+select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 100%;
 }
 
-.label-input {
+.check-boxPlat {
+  display: inline-block;
+
   align-items: center;
-  gap: 10px;
-  gap: 10px;
+  margin-bottom: 15px;
+  margin-right: 10px;
 }
 
-.boton-home {
-  position: absolute;
-  left: 5%;
-  margin: 10px;
-  background-color: black;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.check-boxPlat label {
+  margin-bottom: 5px;
 }
 
-.boton-home:hover {
-  background-color: darkgrey;
-  transform: scale(1.1);
+/* .check-boxPlatContainer {
+  display: flex;
+  flex-wrap: wrap;
+} */
+
+.check-boxPlat div {
+  margin-right: 40px;
+  margin-bottom: 20px;
+}
+
+.check-boxPlatContainer label {
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .submit {
   width: fit-content;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  align-self: center;
   padding: 10px 20px;
   font-size: 1.2em;
   background-color: #3498db;
@@ -52,9 +66,12 @@ input {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.check-boxPlat {
-  display: inline-block;
-  margin-right: 10px;
+.submit:hover {
+  background-color: #267bb5;
+  transform: scale(1.1);
 }
+
+/* Agrega otros estilos según sea necesario */

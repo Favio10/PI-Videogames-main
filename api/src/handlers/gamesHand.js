@@ -48,7 +48,7 @@ const getNameHand = async (req, res) => {
 const postNewHand = async (req, res) => {
   const { name, description, platform, image, released, rating, genres } =
     req.body;
-  console.log(name, description, platform, image, released, rating, genres);
+  //console.log(name, description, platform, image, released, rating, genres);
   if (
     !name ||
     !description ||
@@ -73,8 +73,12 @@ const postNewHand = async (req, res) => {
       rating,
       genres
     );
+
+    //console.log("Respuesta enviada:", response.toJSON());
+
     res.status(200).json(response);
   } catch (error) {
+    //console.error("Error en la creación del videojuego:", error);
     res.status(400).json({ error: error.message });
   }
   return;

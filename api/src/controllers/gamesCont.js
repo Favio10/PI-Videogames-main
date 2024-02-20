@@ -3,36 +3,15 @@ const axios = require("axios");
 const API_KEY = process.env.API_KEY;
 const { Videogame, Genres } = require("../db");
 
-// const getAllCont = async () => {
-//   const infoDB = await Videogame.findAll();
-//   const response = (
-//     await axios.get(
-//       `https://api.rawg.io/api/games?key=${API_KEY}&page_size=100`
-//     )
-//   ).data;
-
-//   return response.results.map((game) => {
-//     const cleanGenres = game.genres.map((genre) => genre.name);
-//     const clean = {
-//       genres: cleanGenres,
-//       id: game.id,
-//       image: game.background_image,
-//       name: game.name,
-//       rating: game.rating,
-//       created: false,
-//     };
-
-//     if (infoDB.length !== 0) {
-//       return [...infoDB, ...clean];
-//     } else {
-//       return [clean];
-//     }
-//   });
-// };
-
 const getAllCont = async () => {
   // Obtener información de la base de datos
-  const infoDB = await Videogame.findAll();
+  const infoDB = await Videogame.findAll({
+    include: [
+      {
+        model: Genres,
+      },
+    ],
+  });
 
   // Obtener información de la API Rawg
   const response = (
@@ -54,9 +33,18 @@ const getAllCont = async () => {
     };
   });
 
+  // filtrar Json de genres
+  const transformedDB = infoDB.map((game) => {
+    const cleanGenres = game.genres.map((genre) => genre.name);
+    return {
+      ...game.toJSON(),
+      genres: cleanGenres,
+    };
+  });
+
   // Combinar la información de la base de datos y la API
   const combinedGames =
-    infoDB.length !== 0 ? [...infoDB, ...apiGames] : apiGames;
+    transformedDB.length !== 0 ? [...transformedDB, ...apiGames] : apiGames;
 
   return combinedGames;
 };
@@ -103,7 +91,15 @@ const getDetailCont = async (id, source) => {
       genres: genreList,
     };
   } else {
-    const gameFromDB = await Videogame.findByPk(id);
+    const gameFromDB = await Videogame.findByPk(id, {
+      include: [
+        {
+          model: Genres,
+        },
+      ],
+    });
+
+    const genreNames = gameFromDB.genres.map((genre) => genre.name).join(", ");
 
     gameDetail = {
       id: gameFromDB.id,
@@ -113,9 +109,13 @@ const getDetailCont = async (id, source) => {
       image: gameFromDB.image,
       released: gameFromDB.released,
       rating: gameFromDB.rating,
+      genres: genreNames,
     };
+    // } catch (error) {
+    //   console.error(error);
+    //   return "Error al consultar la base de datos";
+    // }
   }
-
   return gameDetail;
 };
 
@@ -172,15 +172,16 @@ const postNewCont = async (
     image,
     released,
     rating,
+    genres,
   });
 
-  // if (genresArray && genresArray.length > 0) {
-  //   const genres = await Genres.findAll({
-  //     where: { name: genresArray },
-  //   });
+  if (genres && genres.length > 0) {
+    const genresTotal = await Genres.findAll({
+      where: { id: genres },
+    });
 
-  await newGame.addGenres(genres);
-  // }
+    await newGame.addGenres(genresTotal);
+  }
   //await newGame.addGenres(genres);
 
   return newGame;
