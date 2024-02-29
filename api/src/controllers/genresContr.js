@@ -36,4 +36,10 @@ const getAllCont = async () => {
     throw error; // Puedes manejar el error según tus necesidades
   }
 };
-module.exports = { getAllCont };
+
+const createGenreContr = async (genreNew) => {
+  const nuevoGen = { genreNew };
+  console.log(nuevoGen.genreNew);
+  //await Genres.create({ name: genreNew });
+};
+module.exports = { getAllCont, createGenreContr };

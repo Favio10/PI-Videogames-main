@@ -28,9 +28,41 @@ function Cards({ allVideoGames }) {
   }, [dispatch]);
 
   useEffect(() => {
+    // Cargar el estado desde localStorage al montar el componente
+    const savedState = JSON.parse(localStorage.getItem("cardsState"));
+
+    if (savedState) {
+      setSelectOrderName(savedState.selectOrderName || "default");
+      setSelectOrderRating(savedState.selectOrderRating || "default");
+      setOrigenVideogame(savedState.origenVideogame || "all");
+      setSelectGenre(savedState.selectGenre || "all");
+      setPagActual(savedState.pagActual || 1);
+    }
+  }, []);
+
+  useEffect(() => {
+    // guardar estado al salir de vista
+    const currentState = {
+      selectOrderName,
+      selectOrderRating,
+      origenVideogame,
+      selectGenre,
+      pagActual,
+    };
+
+    localStorage.setItem("cardsState", JSON.stringify(currentState));
+  }, [
+    selectOrderName,
+    selectOrderRating,
+    origenVideogame,
+    selectGenre,
+    pagActual,
+  ]);
+
+  useEffect(() => {
     setListOrdVideogame((prevList) => {
       let filteredList = [...videoGamesList];
-      console.log("Este es el filtered list", filteredList);
+      //console.log("Este es el filtered list", filteredList);
 
       // filtro por name
       switch (selectOrderName) {

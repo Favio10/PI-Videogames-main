@@ -1,4 +1,4 @@
-const { getAllCont } = require("../controllers/genresContr");
+const { getAllCont, createGenreContr } = require("../controllers/genresContr");
 
 const genresHand = async (req, res) => {
   try {
@@ -9,4 +9,14 @@ const genresHand = async (req, res) => {
   }
   return;
 };
-module.exports = { genresHand };
+
+const newGenresHand = async (req, res) => {
+  const { genreNew } = req.body;
+  try {
+    const response = await createGenreContr(genreNew);
+    res.status(200).json(response);
+  } catch (error) {
+    res.stutus(400).json({ error: error.message });
+  }
+};
+module.exports = { genresHand, newGenresHand };
