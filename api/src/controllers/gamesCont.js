@@ -1,6 +1,7 @@
 require("dotenv").config();
 const axios = require("axios");
-const API_KEY = process.env.API_KEY;
+//const API_KEY = process.env.API_KEY;
+const API_KEY = "e31c791198bb47658c8b09f490c32750";
 const { Videogame, Genres } = require("../db");
 
 // contr todos los videogames (con lista asociada)
